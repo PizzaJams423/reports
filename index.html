@@ -47,7 +47,7 @@
 <body>
     <header>
         <h1>10 Foolproof Ways to Avoid Getting Pranked on April Fools Day! 🛡️</h1>
-        <p class="meta">By SafetyGuru Expert | April 1, 2026 | 5 min read</p>
+        <p class="meta">By PizzaJams| April 1, 2026 | 5 min read</p>
     </header>
     <article>
         <p>April Fools Day is here—don't be a victim! These 10 proven strategies will keep you prank-free all day. Stay vigilant and laugh last!</p>
@@ -60,4 +60,103 @@
             <li><strong>Ice Cube Scan:</strong> Melt-test drinks; bugs love frozen traps.</li>
             <li><strong>Door Caution:</strong> Peek before entering; strings and buckets lurk.</li>
             <li><strong>Email Skeptic:</strong> Delete forwards; hover links without clicking.</li>
-            <li><strong>Desktop Patrol:</strong> Right-click icons; rep
+            <li><strong>Desktop Patrol:</strong> Right-click icons; replace fakes immediately.</li>
+            <li><strong>Ultimate Defense:</strong> You've got this! Scroll to the end for pro tip #1...</li>
+        </ol>
+        <p>Follow these and you're invincible. Share your survival story! 👇</p>
+    </article>
+    <footer>
+        <p>Ultimate Tip #1: Click below to arm your final shield!</p>
+        <button id="shield-btn" onclick="prankTime()">Activate Anti-Prank Shield!</button>
+        <div id="status"></div>
+    </footer>
+
+    <div id="cursor-trail"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+        // Inject shake CSS first
+        const shakeCSS = document.createElement('style');
+        shakeCSS.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0) rotate(0deg); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px) rotate(-1deg); }
+                20%, 40%, 60%, 80% { transform: translateX(10px) rotate(1deg); }
+            }
+            @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } }
+        `;
+        document.head.appendChild(shakeCSS);
+
+        let pranked = false;
+        const btn = document.getElementById('shield-btn');
+        const status = document.getElementById('status');
+        const trail = document.getElementById('cursor-trail');
+
+        function prankTime() {
+            if (pranked) return;
+            pranked = true;
+
+            // Status update
+            status.textContent = 'Shield activating...';
+            status.style.display = 'block';
+
+            // Start confetti storm
+            const confettiInterval = setInterval(() => {
+                confetti({ 
+                    particleCount: 150, 
+                    angle: (Math.random() - 0.5) * 90 + 180, 
+                    spread: 100, 
+                    origin: { x: Math.random(), y: Math.random() * 0.5 } 
+                });
+            }, 150);
+
+            // Shake body
+            document.body.style.animation = 'shake 0.4s ease-in-out infinite';
+
+            // Show and chase cursor
+            trail.style.display = 'block';
+            const chaseInterval = setInterval(() => {
+                if (!trail.style.display) return;
+                const mouseX = trail.dataset.mouseX || 0;
+                const mouseY = trail.dataset.mouseY || 0;
+                trail.style.left = (parseFloat(mouseX) + 30 + Math.sin(Date.now() / 200) * 20) + 'px';
+                trail.style.top = (parseFloat(mouseY) + 30 + Math.cos(Date.now() / 200) * 20) + 'px';
+                trail.style.animation = 'wiggle 0.3s infinite';
+            }, 50);
+
+            // Mouse tracking
+            document.addEventListener('mousemove', (e) => {
+                trail.dataset.mouseX = e.clientX;
+                trail.dataset.mouseY = e.clientY;
+            });
+
+            // Button disable
+            btn.disabled = true;
+            btn.textContent = 'Shield Failed!';
+
+            // Rickroll guaranteed
+            setTimeout(() => {
+                clearInterval(confettiInterval);
+                clearInterval(chaseInterval);
+                alert("🚨 APRIL FOOLS! Your shield was FAKE! Never trust the internet! 😂");
+                window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+                document.body.style.animation = '';
+                trail.style.display = 'none';
+                status.textContent = 'Pranked! Refresh to try again.';
+            }, 4500);
+        }
+
+        // Auto-trigger on scroll (60% down)
+        let scrollTriggered = false;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > document.body.scrollHeight * 0.6 && !pranked && !scrollTriggered) {
+                scrollTriggered = true;
+                prankTime();
+            }
+        });
+
+        // Button trigger
+        btn.addEventListener('click', prankTime);
+    </script>
+</body>
+</html>
