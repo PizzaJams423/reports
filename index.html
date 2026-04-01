@@ -14,6 +14,7 @@
             padding: 20px; 
             background: #fff; 
             color: #333; 
+            transition: all 0.3s ease;
         }
         header { text-align: center; padding: 40px 0; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
         h1 { font-size: 2.5em; margin-bottom: 10px; }
@@ -22,13 +23,25 @@
         h2 { color: #00f2fe; margin: 30px 0 15px; font-size: 1.8em; }
         ol { padding-left: 20px; }
         li { margin-bottom: 20px; font-size: 1.1em; }
-        .reveal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; }
-        .confetti { position: absolute; width: 10px; height: 10px; background: hsl(var(--hue), 70%, 60%); animation: fall linear infinite; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
-        #cursor-trail { position: fixed; width: 20px; height: 20px; background: #ff4757; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(20px, 20px); }
-        footer { text-align: #f4f4f4; padding: 40px; background: #f8f9fa; margin-top: 50px; }
-        button { background: #00b894; color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-size: 1.1em; box-shadow: 0 4px 15px rgba(0,184,148,0.4); }
-        button:hover { background: #00a085; }
+        #cursor-trail { 
+            position: fixed; 
+            width: 25px; height: 25px; 
+            background: radial-gradient(circle, #ff4757, #ff3838); 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 10000; 
+            box-shadow: 0 0 20px #ff4757;
+            display: none;
+        }
+        footer { text-align: center; padding: 40px; background: #f8f9fa; margin-top: 50px; }
+        button { 
+            background: #00b894; color: white; border: none; 
+            padding: 15px 30px; border-radius: 30px; cursor: pointer; 
+            font-size: 1.1em; box-shadow: 0 4px 15px rgba(0,184,148,0.4); 
+        }
+        button:hover { background: #00a085; transform: scale(1.05); }
+        button:disabled { background: #ddd; cursor: not-allowed; transform: none; }
+        #status { text-align: center; font-weight: bold; color: #00b894; margin-top: 20px; display: none; }
     </style>
 </head>
 <body>
@@ -47,20 +60,4 @@
             <li><strong>Ice Cube Scan:</strong> Melt-test drinks; bugs love frozen traps.</li>
             <li><strong>Door Caution:</strong> Peek before entering; strings and buckets lurk.</li>
             <li><strong>Email Skeptic:</strong> Delete forwards; hover links without clicking.</li>
-            <li><strong>Desktop Patrol:</strong> Right-click icons; replace fakes immediately.</li>
-            <li><strong>Ultimate Defense:</strong> You've got this! Scroll to the end for pro tip #1...</li>
-        </ol>
-        <p>Follow these and you're invincible. Share your survival story! 👇</p>
-    </article>
-    <footer>
-        <p>Ultimate Tip #1: Click below to arm your final shield!</p>
-        <button onclick="prankTime()">Activate Anti-Prank Shield!</button>
-    </footer>
-
-    <div id="reveal" class="reveal"></div>
-    <div id="cursor-trail"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script>
-        let pranked = false;
-        function prankTime
+            <li><strong>Desktop Patrol:</strong> Right-click icons; rep
